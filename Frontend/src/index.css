@@ -1,0 +1,39 @@
+#home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#subnav {
+    flex-grow: 1;
+    margin-right: 0;
+}
+
+#patients {
+    height: 100%;
+    border-right: 1px solid black;
+}
+
+.patient-header {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#patients li:not(.patient-header) {
+    cursor: pointer;
+}
+
+#detailData {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#detailData tr td:last-child {
+    padding-left: 10px;
+}
+
+#vitals > .card {
+    width: 50%;
+    text-align: center;
+}

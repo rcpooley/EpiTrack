@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const Database = require('./database');
 
 const PORT = 7766;
@@ -8,7 +9,18 @@ const PORT = 7766;
 const db = new Database();
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
+
+app.get('/patients', (req, res) => {
+    db.fetchPatients().then(patients => {
+        res.json(patients);
+    });
+});
+
+app.get('/image/:patientID', (req, res) => {
+    res.sendFile(db.fetchImage(req.params.patientID));
+});
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
