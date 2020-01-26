@@ -1,5 +1,6 @@
 const express = require('express');
 const http = require('http');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Database = require('./database');
@@ -11,6 +12,7 @@ const db = new Database();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'build')));
 
 // map patientID to {}
 let nextID = 1;
