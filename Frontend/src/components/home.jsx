@@ -15,7 +15,7 @@ class HomeComponent extends React.Component {
     }
 
     async componentDidMount() {
-        const patients = await Util.request('/patients');
+        const patients = await Util.fetchPatients();
         this.setState({
             patients,
             selectedPatientID: patients.length > 0 ? patients[0].id : null
@@ -45,7 +45,12 @@ class HomeComponent extends React.Component {
                         ></Patients>
                     </div>
                     <div className="col-sm col-md col-lg">
-                        <PatientDetail patient={this.getSelectedPatient()} />
+                        {this.state.selectedPatientID && (
+                            <PatientDetail
+                                key={this.state.selectedPatientID}
+                                patient={this.getSelectedPatient()}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

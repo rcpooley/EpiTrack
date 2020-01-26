@@ -6,12 +6,51 @@ class PatientDetail extends React.Component {
         super(props);
 
         this.state = {
-            information: ''
+            information: '',
+            updateTimeout: null
         };
     }
 
+    componentDidMount() {
+        Util.fetchPatientInformation(this.props.patient.id).then(
+            ({ information }) => {
+                this.setState({ information });
+            }
+        );
+    }
+
+    componentWillUnmount() {
+        const { updateTimeout, information } = this.state;
+        if (updateTimeout !== null) {
+            clearTimeout(updateTimeout);
+            Util.updatePatientInformation(
+                this.props.patient.id,
+                information
+            ).catch(console.error);
+        }
+    }
+
     updateInformation(information) {
-        this.setState({ information });
+        this.setState(state => {
+            let updateTimeout = state.updateTimeout;
+            if (!updateTimeout) {
+                updateTimeout = setTimeout(() => this.updateBackend(), 1000);
+            }
+            return {
+                information,
+                updateTimeout
+            };
+        });
+    }
+
+    updateBackend() {
+        this.setState(state => {
+            Util.updatePatientInformation(
+                this.props.patient.id,
+                state.information
+            ).catch(console.error);
+            return { updateTimeout: null };
+        });
     }
 
     renderPatientDetail() {
@@ -23,16 +62,18 @@ class PatientDetail extends React.Component {
                     <img src={Util.imageUrl(patient.id)} width={100} />
                 </div>
                 <table id="detailData" className="ml-1">
-                    <tr>
-                        <td>Name:</td>
-                        <td>
-                            {patient.firstName} {patient.lastName}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Age:</td>
-                        <td>{patient.age}</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>Name:</td>
+                            <td>
+                                {patient.firstName} {patient.lastName}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Age:</td>
+                            <td>{patient.age}</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         );
@@ -64,6 +105,7 @@ class PatientDetail extends React.Component {
                 <div className="card-header">Patient Information</div>
                 <div className="card-body">
                     <textarea
+                        rows={5}
                         className="w-100"
                         value={this.state.information}
                         onChange={e => this.updateInformation(e.target.value)}
@@ -78,17 +120,17 @@ class PatientDetail extends React.Component {
             <div className="card h-100">
                 <div className="card-header">Messages</div>
                 <div className="card-body">Yeet</div>
+                <div className="card-footer">
+                    <form className="m-0">
+                        <input type="text" placeholder="Message" />
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
             </div>
         );
     }
 
     render() {
-        const { patient } = this.props;
-
-        if (!patient) {
-            return null;
-        }
-
         return (
             <div id="patientDetail" className="pt-2 h-100 d-flex flex-column">
                 <div className="d-flex">

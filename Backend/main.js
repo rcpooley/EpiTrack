@@ -12,10 +12,25 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/patients', (req, res) => {
+app.post('/patients', (req, res) => {
     db.fetchPatients().then(patients => {
         res.json(patients);
     });
+});
+
+app.post('/updateinfo', (req, res) => {
+    const { patientID, information } = req.body;
+    db.writeInformation(patientID, information).then(() => {
+        res.json({
+            success: true
+        });
+    });
+});
+
+app.post('/getinfo', async (req, res) => {
+    const { patientID } = req.body;
+    const information = await db.fetchInformation(patientID);
+    res.json({ information });
 });
 
 app.get('/image/:patientID', (req, res) => {

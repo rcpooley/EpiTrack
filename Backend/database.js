@@ -6,6 +6,7 @@ const { jwtSecret } = require('./secret.json');
 
 const PATIENTS_DIR = path.join(__dirname, 'patients');
 const IMAGES_DIR = path.join(__dirname, 'images');
+const DATA_DIR = path.join(__dirname, 'data');
 
 class Database {
     async login(username, password) {
@@ -33,6 +34,21 @@ class Database {
 
     fetchImage(patientID) {
         return path.join(IMAGES_DIR, `${patientID}.png`);
+    }
+
+    async fetchInformation(patientID) {
+        try {
+            return fs.readFileSync(
+                path.join(DATA_DIR, `${patientID}.info`),
+                'utf-8'
+            );
+        } catch (e) {
+            return '';
+        }
+    }
+
+    async writeInformation(patientID, information) {
+        fs.writeFileSync(path.join(DATA_DIR, `${patientID}.info`), information);
     }
 }
 
