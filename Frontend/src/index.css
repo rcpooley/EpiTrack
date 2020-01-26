@@ -37,3 +37,28 @@
     width: 50%;
     text-align: center;
 }
+
+.message-list-wrap {
+    height: 0;
+    overflow: auto;
+}
+
+.message-list > div {
+    border: 1px solid black;
+    border-radius: 7px;
+    padding: 5px;
+    width: 66%;
+    margin-top: 4px;
+    color: white;
+    display: flex;
+}
+
+.message-list .me {
+    background-color: rgb(143, 3, 3);
+}
+
+.message-list .you {
+    position: relative;
+    left: 34%;
+    background-color: rgb(114, 113, 113);
+}

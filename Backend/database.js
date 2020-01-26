@@ -50,6 +50,31 @@ class Database {
     async writeInformation(patientID, information) {
         fs.writeFileSync(path.join(DATA_DIR, `${patientID}.info`), information);
     }
+
+    async fetchMessages(patientID) {
+        try {
+            return fs
+                .readFileSync(path.join(DATA_DIR, `${patientID}.msg`), 'utf-8')
+                .split('\n')
+                .filter(line => line.length > 0)
+                .map(line => {
+                    const l = line.replace(/\r/g, '');
+                    return {
+                        me: line[0] === 'A',
+                        msg: line.substring(1)
+                    };
+                });
+        } catch (e) {
+            return [];
+        }
+    }
+
+    async sendMessage(patientID, me, msg) {
+        fs.appendFileSync(
+            path.join(DATA_DIR, `${patientID}.msg`),
+            (me ? 'A' : 'B') + msg + '\n'
+        );
+    }
 }
 
 module.exports = Database;

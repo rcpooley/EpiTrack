@@ -29,8 +29,42 @@ class Util {
         return Util.request('/getinfo', { patientID });
     }
 
+    static fetchMessages(patientID) {
+        return Util.request('/fetchmsg', { patientID });
+    }
+
+    static sendMessage(patientID, msg) {
+        return Util.request('/sendmsg', { patientID, me: true, msg });
+    }
+
     static imageUrl(patientID) {
         return HOST + `/image/${patientID}`;
+    }
+
+    static waitForMsg(patientID, num) {
+        let cancelled = false;
+
+        const prom = new Promise(resolve => {
+            const wait = () => {
+                Util.request('/waitmsg', { patientID, num }).then(resp => {
+                    if (cancelled) return;
+                    if (resp.msg) {
+                        resolve();
+                    } else {
+                        wait();
+                    }
+                });
+            };
+
+            wait();
+        });
+
+        return {
+            prom,
+            cancel: () => {
+                cancelled = true;
+            }
+        };
     }
 }
 
