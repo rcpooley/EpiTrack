@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HealthApp</string>
+    <string name="field_username">Username</string>
+    <string name="button_login">Login</string>
+    <string name="field_password">Password</string>
+    <string name="nav_vitals">Vitals</string>
+    <string name="nav_msg">Messages</string>
+    <string name="vital_temp">Temperature</string>
+    <string name="loading">Loading…</string>
+    <string name="vital_oxygen">Blood Oxygen Level</string>
+</resources>

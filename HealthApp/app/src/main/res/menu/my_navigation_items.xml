@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_vitals"
+        android:title="@string/nav_vitals"
+        android:icon="@drawable/ic_healing_black_24dp" />
+    <item android:id="@+id/action_message"
+        android:title="@string/nav_msg"
+        android:icon="@drawable/ic_message_black_24dp" />
+</menu>
