@@ -141,14 +141,14 @@ class PatientDetail extends React.Component {
                 <div className="card">
                     <div className="card-header">Patient Temperature</div>
                     <div className="card-body">
-                        <span>10000</span>
+                        <span>98.6 F</span>
                     </div>
                 </div>
                 <span className="p-2" />
                 <div className="card">
                     <div className="card-header">Blood Oxygen</div>
                     <div className="card-body">
-                        <span>10000</span>
+                        <span>99%</span>
                     </div>
                 </div>
             </div>
@@ -234,7 +234,7 @@ class PatientDetail extends React.Component {
                     </div>
                 </div>
                 <div className="d-flex mt-2 mb-2 flex-grow-1">
-                    <div className="w-50 pr-1">Graphs</div>
+                    <div className="w-50 pr-1"></div>
                     <div className="w-50 pl-1">{this.renderMessages()}</div>
                 </div>
             </div>
