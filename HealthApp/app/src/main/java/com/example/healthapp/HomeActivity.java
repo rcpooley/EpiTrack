@@ -13,6 +13,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private String patientID;
+
     private ArduinoComm arduinoComm;
 
     @Override
@@ -20,12 +22,22 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        arduinoComm = new ArduinoComm();
+        patientID = getIntent().getStringExtra("patientID");
+
+//        arduinoComm = new ArduinoComm(this);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         setFragment(new VitalsFragment());
+    }
+
+    public String getPatientID() {
+        return patientID;
+    }
+
+    public ArduinoComm getArduinoComm() {
+        return arduinoComm;
     }
 
     private void setFragment(Fragment fragment) {

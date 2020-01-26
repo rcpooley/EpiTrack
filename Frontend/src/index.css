@@ -53,11 +53,11 @@
     display: flex;
 }
 
-.message-list .me {
+.message-list .you {
     background-color: rgb(143, 3, 3);
 }
 
-.message-list .you {
+.message-list .me {
     position: relative;
     left: 34%;
     background-color: rgb(114, 113, 113);

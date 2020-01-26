@@ -5,41 +5,55 @@
     android:layout_height="match_parent"
     tools:context=".VitalsFragment">
 
-    <TextView
-        android:id="@+id/labelTemp"
+    <RelativeLayout
+        android:id="@+id/vitalContainer"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/vital_temp"
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/labelTemp"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:text="@string/vital_temp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/labelOxygen"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_below="@+id/currentTemp"
+            android:layout_marginTop="16dp"
+            android:text="@string/vital_oxygen"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/currentTemp"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:layout_below="@+id/labelTemp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/currentOxygen"
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:layout_below="@+id/labelOxygen"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textSize="36sp" />
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/labelOxygen"
+        android:id="@+id/textStatus"
         android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_below="@+id/currentTemp"
-        android:layout_marginTop="16dp"
-        android:text="@string/vital_oxygen"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/currentTemp"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:layout_below="@+id/labelTemp"
-        android:layout_marginTop="16dp"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:textSize="36sp" />
-
-    <TextView
-        android:id="@+id/currentOxygen"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:layout_below="@+id/labelOxygen"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:textSize="36sp" />
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
 
 </RelativeLayout>

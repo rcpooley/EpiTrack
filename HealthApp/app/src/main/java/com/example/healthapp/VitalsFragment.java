@@ -7,11 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 public class VitalsFragment extends Fragment {
 
+    private ArduinoComm comm;
+
+    private RelativeLayout vitalContainer;
+    private TextView status;
     private TextView currentTemp;
     private TextView currentOxygen;
 
@@ -20,12 +25,25 @@ public class VitalsFragment extends Fragment {
                              Bundle savedInstanceState) {
         getActivity().setTitle("Vitals");
 
-        View view = inflater.inflate(R.layout.fragment_vitals, container, false);
+        HomeActivity home = (HomeActivity) getActivity();
+        comm = home.getArduinoComm();
 
+        View view = inflater.inflate(R.layout.fragment_vitals, container, false);
+        vitalContainer = view.findViewById(R.id.vitalContainer);
+        status = view.findViewById(R.id.textStatus);
         currentTemp = view.findViewById(R.id.currentTemp);
-        currentTemp.setText(R.string.loading);
         currentOxygen = view.findViewById(R.id.currentOxygen);
-        currentOxygen.setText(R.string.loading);
+
+//        if (!comm.isEnabled()) {
+//            vitalContainer.setVisibility(View.GONE);
+//            status.setText(R.string.enable_bluetooth);
+//        } else if (!comm.isConnected()) {
+//            vitalContainer.setVisibility(View.GONE);
+//            status.setText(R.string.bt_connecting);
+//        }
+
+        currentTemp.setText("98.6 F");
+        currentOxygen.setText("99%");
 
         return view;
     }

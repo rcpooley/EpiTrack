@@ -8,4 +8,8 @@
     <string name="vital_temp">Temperature</string>
     <string name="loading">Loading…</string>
     <string name="vital_oxygen">Blood Oxygen Level</string>
+    <string name="button_send">Send</string>
+    <string name="enable_bluetooth">Please enable Bluetooth</string>
+    <string name="field_message">Message</string>
+    <string name="bt_connecting">Connecting...</string>
 </resources>

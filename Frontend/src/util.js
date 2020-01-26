@@ -1,5 +1,5 @@
-// const HOST = 'http://localhost:7766';
-const HOST = 'http://epitrack.tk';
+// const HOST = 'http://epitrack.tk';
+const HOST = 'http://localhost:7766';
 
 class Util {
     static request(endpoint, data) {

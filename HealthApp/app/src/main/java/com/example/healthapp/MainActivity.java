@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         public void goToHome(String token) {
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            intent.putExtra("token", token);
+//            intent.putExtra("token", token);
+            intent.putExtra("patientID", this.username.toLowerCase());
             startActivity(intent);
         }
     }

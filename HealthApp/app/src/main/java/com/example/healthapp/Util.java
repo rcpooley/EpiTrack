@@ -1,5 +1,6 @@
 package com.example.healthapp;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,7 +14,8 @@ import java.net.URL;
 
 public class Util {
 
-    private static final String HOST = "http://10.0.2.2:7766";
+//    private static final String HOST = "http://10.0.2.2:7766";
+    private static final String HOST = "http://epitrack.tk";
 
     private static JSONObject failResp;
 
@@ -63,15 +65,33 @@ public class Util {
         }
     }
 
-    public static String jsonData(String... params) {
+    public static String jsonData(Object... params) {
         JSONObject obj = new JSONObject();
         for (int i = 0; i < params.length; i += 2) {
             try {
-                obj.put(params[i], params[i + 1]);
+                obj.put(params[i].toString(), params[i + 1]);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         return obj.toString();
+    }
+
+    public static void sendMessage(String patientID, String msg) {
+        request("/sendmsg", jsonData("patientID", patientID, "msg", msg, "me", false));
+    }
+
+    public static JSONArray getMessages(String patientID) {
+        JSONObject resp = request("/fetchmsg", jsonData("patientID", patientID));
+        try {
+            return resp.getJSONArray("messages");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return new JSONArray();
+        }
+    }
+
+    public static void waitMessage(String patientID, int num) {
+        request("/waitmsg", jsonData("patientID", patientID, "num", num));
     }
 }
